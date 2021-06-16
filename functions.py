@@ -19,6 +19,15 @@ from pylab import rcParams
 rcParams['figure.figsize'] = 18, 8
 from sklearn.preprocessing import MinMaxScaler
 
+def get_dataset():
+    df = pd.read_csv('drive/MyDrive/train.csv')
+    df = df.sample(frac=1).reset_index(drop=True)
+    df["m_id"] = df["m_id"].astype('category')
+    df["m_id"] = df["m_id"].cat.codes
+    target = df['cpu_01_busy']
+    df.drop(['cpu_01_busy', 'sample_time'], axis=1, inplace=True)
+    return df, target
+
 def split_servers(df_local):
 	df_local = df_local.copy()
 	servers = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
