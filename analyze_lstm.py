@@ -1,11 +1,11 @@
 from functions import *
-
+from columns import *
 
 df = pd.read_csv('drive/MyDrive/storage/train.csv')
 #df.dropna(inplace=True)
 #df.fillna(0, inplace=True)
 
-#df = df[[*columns]]
+df = df[[*columns]]
 dfs = split_servers(df)
 format = '%Y-%m-%d %H:%M:%S'
 index = pd.to_datetime(df.iloc[0::7, :]['sample_time'], format=format).values#df.iloc[0::7, :]['sample_time']
